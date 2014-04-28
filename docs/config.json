@@ -1,0 +1,18 @@
+{
+  "baseUrl": "/react-grid/",
+  "locals": {
+    "repo": "https://github.com/prometheusresearch/react-grid",
+    "title": "React Grid",
+    "pages": [
+      {
+        "name": "React Grid",
+        "path": ""
+      }
+    ]
+  },
+  "plugins": [
+    "./plugins/react-templates.coffee",
+    "./plugins/less-file.coffee",
+    "./plugins/jsx.coffee"
+  ]
+}
