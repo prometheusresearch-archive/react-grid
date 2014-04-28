@@ -1,0 +1,107 @@
+@react-grid-shadow: 0px 0px 4px 0px @table-border-color;
+
+.react-grid {
+
+  background-color: @body-bg;
+  border: 1px solid @table-border-color;
+
+  .react-grid-canvas {
+    background-color: @body-bg;
+  }
+
+  .react-grid-cell {
+    padding: @table-cell-padding;
+    border-top: 1px solid @table-border-color;
+  }
+
+}
+
+.react-grid-header {
+  box-shadow: @react-grid-shadow;
+  background: @gray-lighter;
+
+  .react-grid-header-row.locked {
+    border-right: 1px solid @table-border-color;
+  }
+
+  &.resizing {
+    cursor: ew-resize;
+  }
+}
+
+.react-grid-viewport {
+
+  .react-grid-canvas.locked {
+    border-right: 1px solid @table-border-color;
+  }
+}
+
+.react-grid-header-row {
+  .user-select(none);
+  border-bottom: 1px solid @table-border-color;
+
+  .react-grid-header-cell {
+    .user-select(none);
+
+    padding: @table-cell-padding;
+    font-weight: bold;
+    border-right: 1px solid @table-border-color;
+
+    .react-grid-header-cell-resize-handle:hover {
+      cursor: ew-resize;
+      background: @table-border-color;
+    }
+
+    &.resizing {
+      .react-grid-header-cell-resize-handle {
+        background: @table-border-color;
+      }
+    }
+  }
+
+}
+
+.react-grid-scrollbar {
+  @color: @gray-light;
+
+  background: none;
+  .user-select(none);
+
+  .react-grid-scrollbar-stick-appearance {
+    background-color: @color;
+    opacity: 0.3;
+    border-radius: 7px;
+  }
+
+  &.horizontal {
+    height: 15px;
+
+    .react-grid-scrollbar-stick {
+      height: 15px;
+    }
+    .react-grid-scrollbar-stick-appearance {
+      height: 7px;
+      margin-top: 4px;
+      margin-bottom: 4px;
+      margin-right: 2%;
+      margin-left: 2%;
+      width: 96%;
+    }
+  }
+
+  &.vertical {
+    width: 15px;
+
+    .react-grid-scrollbar-stick {
+      width: 15px;
+    }
+    .react-grid-scrollbar-stick-appearance {
+      width: 7px;
+      margin-right: 4px;
+      margin-left: 4px;
+      height: 96%;
+      margin-top: 2%;
+      margin-bottom: 2%;
+    }
+  }
+}
