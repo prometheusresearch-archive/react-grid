@@ -13,8 +13,7 @@ var Example = React.createClass({
     var name = page.filepath.relative.replace(/\.md$/, '');
 
     var scripts = page.metadata.scripts || [];
-    scripts.unshift(`scripts/${name}.js`);
-    scripts.unshift('scripts/ShowValue.js');
+    scripts.push(`scripts/${name}.js`);
 
     return this.transferPropsTo(
       <Page scripts={scripts}>

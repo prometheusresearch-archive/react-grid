@@ -121,10 +121,16 @@ var Index = React.createClass({
         <div className="container">
           <h3>Features</h3>
           <p>
-            Out of the box React Grid tries to provide a minimal set of features, a foundation on which more complex functionality can be built. Currently those built-in features are <strong>virtual scrolling</strong>, <strong>locked columns</strong>, <strong>resizeable columns</strong>.
+            React Grid component provides a basis for implementing grids with custom behaviours and appearance. It tries to have just a minimum feature set and parametrize over row, cell and header renderers so one can replace any part of the grid with their own custom implementations with no hassle.
           </p>
           <p>
-            The main extension mechanism is an ability to define custom <strong>header and cell rendereres</strong> on top of which such features as sortable columns can be implemented.
+            In fact, implementing sortable behaviour and grid which lazily loads data from remote data source can be done in under 100 lines of code.
+          </p>
+          <p>
+            React Grid implements <strong>virtual scrolling</strong> — at any given moment it renders only a visible part of the dataset. That allows to use React Grid to visualize large datasets without putting a pressure on browser internals.
+          </p>
+          <p>
+            Other notably features are <strong>locked columns</strong> and <strong>resizeable columns</strong>.
           </p>
         </div>
         <StandaloneUsage />
