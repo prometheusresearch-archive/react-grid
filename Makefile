@@ -3,6 +3,9 @@ PATH := $(BIN):$(PATH)
 TESTS = $(shell find ./lib -path '**/tests/*.js')
 MAKE_DOCS = $(MAKE) --no-print-directory -C docs
 
+install:
+	@npm $@
+
 docs-preview docs-publish::
 	@$(MAKE_DOCS) $(@:docs-%=%)
 
