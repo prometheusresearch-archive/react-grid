@@ -2,7 +2,7 @@
 
 Data grid for [React][].
 
-See examples for more info [here](docs/contents/documentation/index.md)
+See the [Docs](docs/contents/documentation/index.md) and [examples](docs/contents/examples)
 
 ## Credits
 
