@@ -8,6 +8,7 @@ gulp.task('clean', function() {
 var react = require('gulp-react');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
+var jshint = require('gulp-jshint');
 
 // Parse and compress JS and JSX files
 
@@ -28,7 +29,7 @@ gulp.task('javascript', function() {
 
 var browserify = require('gulp-browserify');
 
-gulp.task('browserify', ['javascript'], function() {
+gulp.task('browserify', ['javascript', 'lint'], function() {
   return gulp.src('build/javascript/index.js')
     .pipe(browserify({transform: ['envify']}))
     .pipe(rename('compiled.js'))
@@ -36,6 +37,12 @@ gulp.task('browserify', ['javascript'], function() {
     .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
     .pipe(gulp.dest('build/javascript/'));
+});
+
+gulp.task('lint', function() {
+  return gulp.src('./build/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
 });
 
 var less = require('gulp-less');
