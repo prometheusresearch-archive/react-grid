@@ -2,6 +2,8 @@
 
 Data grid for [React][].
 
+See examples for more info [here](docs/contents/documentation/index.md)
+
 ## Credits
 
 React Grid is free software created by [Prometheus Research][] and is released
