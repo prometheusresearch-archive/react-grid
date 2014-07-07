@@ -2,7 +2,7 @@
 
 Data grid for [React][].
 
-See the [Docs](docs/contents/documentation/index.md) and [examples](docs/contents/examples)
+See the [Docs](http://prometheusresearch.github.io/react-grid/)
 
 ## Credits
 
