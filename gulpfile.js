@@ -27,6 +27,12 @@ gulp.task('javascript', function() {
     //.pipe(gulp.dest('build/javascript/'));
 });
 
+gulp.task('jsxExamples', function() {
+  return gulp.src('examples/jsx/*.jsx')
+    .pipe(react())
+    .pipe(gulp.dest('examples/build/'))
+});
+
 var browserify = require('gulp-browserify');
 
 gulp.task('browserify', ['javascript', 'lint'], function() {
