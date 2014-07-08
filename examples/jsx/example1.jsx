@@ -2,6 +2,10 @@
  * @jsx React.DOM
  */
 (function() {
+
+var React = require('react');
+var ReactGrid = require('../../lib/Grid.js')
+
 'use strict';
 
 function rows(start, end) {
@@ -38,8 +42,7 @@ React.renderComponent(
     columns={columns}
     length={30000}
     rows={rows}
-    rowHeight={40}
-    />,
+    rowHeight={40}/>,
   document.getElementById('example'));
 
 })();
