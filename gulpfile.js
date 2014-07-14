@@ -1,5 +1,7 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
+var open = require('gulp-open');
+
 
 gulp.task('clean', function() {
   return gulp.src(['build/*'], {read: false}).pipe(clean());
@@ -9,6 +11,7 @@ var react = require('gulp-react');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var jshint = require('gulp-jshint');
+var connect = require('gulp-connect');
 
 // Parse and compress JS and JSX files
 
@@ -26,6 +29,29 @@ gulp.task('javascript', function() {
     // Output each optimized .min.js file into the ./build/javascript/ dir
     //.pipe(gulp.dest('build/javascript/'));
 });
+
+gulp.task('compile-examples', function() {
+  return gulp.src('examples/jsx/*.jsx')
+    .pipe(browserify({transform: ['envify']}))
+    .pipe(react())
+    .pipe(gulp.dest('examples/build/'))
+});
+
+gulp.task('connect', ['compile-examples'], function() {
+  connect.server({
+    livereload : true
+  });
+});
+
+gulp.task("example", ['connect'], function(){
+  var options = {
+    url: "http://localhost:8080/examples/example1.html",
+    app: "chrome"
+  };
+  gulp.src("./examples/example1.html")
+  .pipe(open("", options));
+});
+
 
 var browserify = require('gulp-browserify');
 
