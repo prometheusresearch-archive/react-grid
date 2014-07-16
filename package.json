@@ -1,7 +1,7 @@
 {
   "name": "react-grid",
   "version": "0.0.0",
-  "description": "Data grid fro React",
+  "description": "Data grid for React",
   "main": "lib/index.js",
   "scripts": {
     "test": "make test"
@@ -27,7 +27,6 @@
     "gulp-react": "^0.4.0",
     "gulp-clean": "~0.3.1",
     "gulp-minify-css": "^0.3.6",
-    "gulp-nodemon": "^1.0.4",
     "gulp-browserify": "^0.5.0",
     "gulp-less": "^1.3.1",
     "reactify": "~0.11.0",
@@ -37,7 +36,17 @@
     "gulp-jshint": "^1.6.4",
     "envify": "^1.2.1",
     "gulp-connect": "^2.0.6",
-    "gulp-open": "^0.2.8"
+    "gulp-open": "^0.2.8",
+    "glob": "~4.0.4",
+    "gulp-concat": "~2.3.3",
+    "gulp-flatten": "0.0.2",
+    "gulp-plumber": "~0.6.3",
+    "gulp-template": "~0.1.1",
+    "jshint-stylish": "~0.4.0"
+  },
+  "browser": {
+    "react-grid": "./build/js/react-grid.js",
+    "plugin": "./src/javascript/vendor/jquery-plugin.js"
   },
   "browserify": {
     "transform": [
@@ -49,12 +58,12 @@
       ]
     ]
   },
-  "author": "Prometheus Research",
+  "author": "adazzle",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/prometheusresearch/react-grid/issues"
+    "url": "https://github.com/adazzle/react-grid/issues"
   },
-  "homepage": "https://github.com/prometheusresearch/react-grid",
+  "homepage": "https://github.com/adazzle/react-grid",
   "dependencies": {
     "reactify": "^0.11.0",
     "lodash": "~2.4.1",
