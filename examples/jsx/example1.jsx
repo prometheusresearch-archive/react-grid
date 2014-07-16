@@ -4,7 +4,7 @@
 (function() {
 
 var React = require('react');
-var ReactGrid = require('../../lib/Grid.js')
+var ReactGrid = require('../../lib/Grid.js');
 
 'use strict';
 

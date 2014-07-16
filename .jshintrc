@@ -8,6 +8,8 @@
   "expr": true,
   "funcscope": true,
   "globalstrict": true,
+  "laxcomma": true,
+  "laxbreak": true,
   "loopfunc": true,
   "newcap": false,
   "noempty": true,
