@@ -20,7 +20,8 @@ var columns = [
   {
     name: '№',
     width: '10%',
-    key: 0
+    key: 0,
+    locked:true
   },
   {
     name: 'Name',
