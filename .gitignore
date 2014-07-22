@@ -1,5 +1,6 @@
 node_modules
 docs/build
 **/build
-**/dist
+dist
+build
 examples/build

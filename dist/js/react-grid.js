@@ -13237,7 +13237,7 @@ var ReactPerf = {
    * Boolean to enable/disable measurement. Set to false by default to prevent
    * accidental logging and perf loss.
    */
-  enableMeasure: true,
+  enableMeasure: false,
 
   /**
    * Holds onto the measure function in use. By default, don't measure
