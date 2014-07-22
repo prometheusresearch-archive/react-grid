@@ -1,7 +1,6 @@
 node_modules
 docs/build
-standalone/react-grid.min.js
-standalone/react-grid.js
 **/build
+**/dist
 examples/build
 **/*.orig
