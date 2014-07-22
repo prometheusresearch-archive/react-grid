@@ -78,8 +78,7 @@ var minifycss = require('gulp-minify-css');
 // });
 
 gulp.task('watch', function() {
-  gulp.watch('lib/**/*.js', ['browserify']);
-  gulp.watch('examples/**/*.jsx', ['examples']);
+  gulp.watch(['lib/**/*.js','examples/**/*.jsx'], ['browserify','examples']);
 
   // Watch for .less file changes and re-run the 'styles' task
   //gulp.watch('frontend/**/*.less', ['styles']);
