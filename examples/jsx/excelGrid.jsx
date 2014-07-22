@@ -58,7 +58,7 @@ var columns = [
 
 
 var renderGrid = function() {
-  var grid = ExcelGrid({columns:columns, rows: rows, length: data.length});
+  var grid = ExcelGrid({columns:columns, rows: rows, length: data.length, height: 400});
     React.renderComponent(grid,
       document.getElementById('example'));
 };
