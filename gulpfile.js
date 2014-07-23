@@ -1,75 +1,69 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
-var open = require('gulp-open');
 
 
 gulp.task('clean', function() {
-  return gulp.src(['build/*'], {read: false}).pipe(clean());
+  return gulp
+    .src(['build/*','dist/*'], {read: false})
+    .pipe(clean({force: true}));
 });
 
+var plumber = require('gulp-plumber');
 var react = require('gulp-react');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
-var jshint = require('gulp-jshint');
-var connect = require('gulp-connect');
 
-// Parse and compress JS and JSX files
+gulp.task('javascript',['clean'], function() {
 
-gulp.task('javascript', function() {
-  // Listen to every JS file in ./frontend/javascript
-  return gulp.src('lib/**/*.js')
+  return gulp.src(['lib/*.js'])
+    .pipe(plumber())
     // Turn React JSX syntax into regular javascript
-    .pipe(react())
+    .pipe(react({harmony:false}))
     // Output each file into the ./build/javascript/ directory
-    .pipe(gulp.dest('build/javascript/'))
-    // Optimize each JavaScript file
-    //.pipe(uglify())
-    // Add .min.js to the end of each optimized file
-    //.pipe(rename({suffix: '.min'}))
-    // Output each optimized .min.js file into the ./build/javascript/ dir
-    //.pipe(gulp.dest('build/javascript/'));
+    .pipe(gulp.dest('build/js/'));
 });
 
-gulp.task('compile-examples', function() {
-  return gulp.src('examples/jsx/*.jsx')
-    .pipe(browserify({transform: ['envify']}))
-    .pipe(react())
-    .pipe(gulp.dest('examples/build/'))
-});
 
-gulp.task('connect', ['compile-examples'], function() {
-  connect.server({
-    livereload : true
-  });
-});
 
-gulp.task("example", ['connect'], function(){
-  var options = {
-    url: "http://localhost:8080/examples/example1.html",
-    app: "chrome"
-  };
-  gulp.src("./examples/example1.html")
-  .pipe(open("", options));
+var jshint = require('gulp-jshint');
+function lint(src) {
+  return gulp.src(src)
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+}
+gulp.task('lint', ['javascript'],function() {
+  return lint(['build/**/*.js']);
 });
-
 
 var browserify = require('gulp-browserify');
 
 gulp.task('browserify', ['javascript', 'lint'], function() {
-  return gulp.src('build/javascript/index.js')
+
+
+   return gulp.src('build/js/index.js')
+     .pipe(plumber())
     .pipe(browserify({transform: ['envify']}))
-    .pipe(rename('compiled.js'))
-    .pipe(gulp.dest('build/javascript/'))
+    .pipe(rename('react-grid.js'))
+    .pipe(gulp.dest('dist/js/'))
     .pipe(uglify())
     .pipe(rename({suffix: '.min'}))
-    .pipe(gulp.dest('build/javascript/'));
+    .pipe(gulp.dest('dist/js/'));
+
+
 });
 
-gulp.task('lint', function() {
-  return gulp.src('./build/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+gulp.task('examples',['browserify'], function() {
+
+     //process examples
+    return gulp.src('examples/jsx/*.jsx')
+    .pipe(plumber())
+    .pipe(browserify({transform: ['envify','reactify']}))
+    .pipe(gulp.dest('build/js/examples/'));
+
+
 });
+
+
 
 var less = require('gulp-less');
 var minifycss = require('gulp-minify-css');
@@ -82,33 +76,44 @@ var minifycss = require('gulp-minify-css');
 //     .pipe(rename({suffix: '.min'}))
 //     .pipe(gulp.dest('build/'));
 // });
-var nodemon = require('gulp-nodemon');
 
-gulp.task('watch', ['clean'], function() {
-  var watching = false;
-  gulp.start('browserify', 'styles', function() {
-    // Protect against this function being called twice. (Bug?)
-    if (!watching) {
-      watching = true;
+gulp.task('watch', function() {
+  gulp.watch(['lib/**/*.js','examples/**/*.jsx'], ['browserify','examples']);
 
-      // Watch for changes in frontend js and run the 'javascript' task
-      gulp.watch('lib/**/*.js', ['javascript','browserify_nodep']);
+  // Watch for .less file changes and re-run the 'styles' task
+  //gulp.watch('frontend/**/*.less', ['styles']);
 
-      // // Run the 'browserify_nodep' task when client.js changes
-      // gulp.watch('build/javascript/compiled.js', ['browserify_nodep']);
-
-      // Watch for .less file changes and re-run the 'styles' task
-      //gulp.watch('frontend/**/*.less', ['styles']);
-
-      // Start up the server and have it reload when anything in the
-      // ./build/ directory changes
-      //nodemon({script: 'server.js', watch: 'build'});
-    }
-  });
 });
 
-gulp.task('default', ['clean'], function() {
-  return gulp.start('browserify'
-  	//, 'styles'
-  	);
+
+var connect = require('gulp-connect');
+gulp.task('connect', function(done) {
+  connect.server({
+    livereload : true
+  });
+  done();
+});
+
+var open = require('gulp-open');
+gulp.task("launch-example", ['connect', 'browserify'], function(){
+  var options = {
+    url: "http://localhost:8080/examples/example1.html",
+    app: "chrome"
+  };
+  return gulp.src("./examples/example1.html")
+  .pipe(open("", options));
+});
+
+
+gulp.task('launch', ['connect', 'browserify'], function(){
+  var options = {
+    url: "http://localhost:8080/",
+    app: "chrome"
+  };
+  return gulp.src("./index.html")
+  .pipe(open("", options));
+});
+
+gulp.task('default',['browserify','examples', 'launch', 'watch'], function() {
+
 });

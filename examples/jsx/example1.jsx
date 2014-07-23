@@ -4,7 +4,7 @@
 (function() {
 
 var React = require('react');
-var ReactGrid = require('../../lib/Grid.js')
+var ReactGrid = require('../../lib/Grid.js');
 
 'use strict';
 
@@ -20,7 +20,8 @@ var columns = [
   {
     name: '№',
     width: '10%',
-    key: 0
+    key: 0,
+    locked:true
   },
   {
     name: 'Name',
