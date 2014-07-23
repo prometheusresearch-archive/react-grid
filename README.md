@@ -7,7 +7,7 @@ Data grid for [React](http://facebook.github.io/react)
 0. you'll need node, and an editor. Till visual studio does JSX, we think Atom.io is the best, so if you dont already, grab them:
  
 		choco install atom
-		choco install node
+		choco install nodejs.install *if typing npm gives you an error*
 		git clone https://github.com/adazzle/react-grid *in the root directory you want your files in*
 
 1. You'll also need Gulp which will perform build tasks such as jsx compilation (specified in gulpfile.js) - Go get it:
