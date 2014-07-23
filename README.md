@@ -9,6 +9,7 @@ Data grid for [React](http://facebook.github.io/react)
 		choco install atom
 		choco install nodejs.install *if typing npm gives you an error*
 		git clone https://github.com/adazzle/react-grid *in the root directory you want your files in*
+		cd .\react-grid
 
 1. You'll also need Gulp which will perform build tasks such as jsx compilation (specified in gulpfile.js) - Go get it:
 		
