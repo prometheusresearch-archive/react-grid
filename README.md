@@ -28,7 +28,7 @@ Have a look in the gulpfile for other commands or add your own
 ## Credits
 
 React Grid is forked from  [Prometheus Research](http://prometheusresearch.github.io/react-grid)
-This version is creqted by [adazzle](https://www.adazzle.com) and released under the [MIT](licence.txt).
+This version is created by [adazzle](https://www.adazzle.com) and released under the [MIT](licence.txt).
 
 For more details, see the [React docs](http://facebook.github.io/react/), especially [thinking in react](http://facebook.github.io/react/docs/thinking-in-react.html)
 
