@@ -16,7 +16,7 @@ var rename = require('gulp-rename');
 gulp.task('javascript',['clean'], function() {
 
   return gulp.src(['lib/*.js'])
-  //.pipe(plumber())
+    .pipe(plumber())
     // Turn React JSX syntax into regular javascript
     .pipe(react({harmony:false}))
     // Output each file into the ./build/javascript/ directory
