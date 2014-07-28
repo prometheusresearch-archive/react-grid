@@ -1,8 +1,5 @@
-/**
- * @jsx React.DOM
- */
-'use strict';
-var ExcelGrid = require('../../lib/ExcelGrid');
+var _ = require("underscore");
+var ExcelGrid = require('./ExcelGrid');
 var React = require('React');
 
 var data = [];
@@ -56,14 +53,23 @@ var columns = [
   }
 ];
 
-
-var renderGrid = function(containerId) {
-  containerId = containerId || 'sandbox';
-  var grid = ExcelGrid({columns:columns, rows: rows, length: data.length, height: 400});
-    React.renderComponent(grid,
-      document.getElementById(containerId));
+var getGrid = function(args) {
+  args = args || {};
+  args = _.defaults(args, {
+    containerId: 'sandbox',
+    columns: columns,
+    rows: rows,
+    removeFreezeCols: false,
+    dataLength: data.length,
+    height:400
+  });
+  return ExcelGrid({columns:args.columns, rows: args.rows, length: args.dataLength, height: args.height});
 };
-renderGrid();
-
-//force a global react object, for chrome dev tools if nothing else
-window.React = window.React || React;
+var renderGrid = function(args) {
+    return React.renderComponent(getGrid(args),
+      document.getElementById(args.containerId));
+};
+module.exports = {
+  getGrid: getGrid,
+  renderGrid: renderGrid
+};
