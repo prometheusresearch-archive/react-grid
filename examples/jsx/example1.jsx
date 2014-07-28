@@ -44,6 +44,6 @@ React.renderComponent(
     length={30000}
     rows={rows}
     rowHeight={40}/>,
-  document.getElementById('example'));
+  document.getElementById('sandbox'));
 
 })();
