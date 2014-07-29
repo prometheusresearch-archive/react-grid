@@ -1,0 +1,102 @@
+@react-grid-shadow: 0px 0px 4px 0px @table-border-color;
+@react-grid-scrollbar-color: @gray-light;
+
+.react-grid-Grid {
+  background-color: @body-bg;
+  border: 1px solid @table-border-color;
+}
+
+.react-grid-Canvas {
+  background-color: @body-bg;
+}
+
+.react-grid-Cell {
+  padding: @table-cell-padding;
+  border-top: 1px solid @table-border-color;
+}
+
+.react-grid-Header {
+  box-shadow: @react-grid-shadow;
+  background: @gray-lighter;
+}
+
+.react-grid-Header__locked {
+  border-right: 1px solid @table-border-color;
+}
+
+.react-grid-Header--resizing {
+  cursor: ew-resize;
+}
+
+.react-grid-Viewport__locked {
+  border-right: 1px solid @table-border-color;
+}
+
+.react-grid-HeaderRow {
+  .user-select(none);
+  border-bottom: 1px solid @table-border-color;
+}
+
+.react-grid-HeaderCell {
+  .user-select(none);
+
+  padding: @table-cell-padding;
+  font-weight: bold;
+  border-right: 1px solid @table-border-color;
+
+}
+
+.react-grid-HeaderCell__resizeHandle:hover {
+  cursor: ew-resize;
+  background: @table-border-color;
+}
+
+.react-grid-HeaderCell--resizing {
+  .react-grid-HeaderCell__resizeHandle {
+    background: @table-border-color;
+  }
+}
+
+.react-grid-Scrollbar {
+
+  background: none;
+  .user-select(none);
+}
+
+.react-grid-Scrollbar__stickAppearance {
+  background-color: @react-grid-scrollbar-color;
+  opacity: 0.3;
+  border-radius: 7px;
+}
+
+.react-grid-Scrollbar--horizontal {
+  height: 15px;
+
+  .react-grid-Scrollbar__stick {
+    height: 15px;
+  }
+  .react-grid-Scrollbar__stickAppearance {
+    height: 7px;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    margin-right: 2%;
+    margin-left: 2%;
+    width: 96%;
+  }
+}
+
+.react-grid-Scrollbar--vertical {
+  width: 15px;
+
+  .react-grid-Scrollbar__stick {
+    width: 15px;
+  }
+  .react-grid-Scrollbar__stickAppearance {
+    width: 7px;
+    margin-right: 4px;
+    margin-left: 4px;
+    height: 96%;
+    margin-top: 2%;
+    margin-bottom: 2%;
+  }
+}
