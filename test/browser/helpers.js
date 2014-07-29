@@ -56,7 +56,6 @@ var columns = [
 var getGrid = function(args) {
   args = args || {};
   args = _.defaults(args, {
-    containerId: 'sandbox',
     columns: columns,
     rows: rows,
     removeFreezeCols: false,

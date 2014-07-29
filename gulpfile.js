@@ -133,7 +133,6 @@ gulp.task('tests-1', function () {
 
   return gulp.src('test/**/*.js')
     .pipe(plumber())
-    .pipe(rename({suffix:'.spec'}))
     .pipe(flatten())
     .pipe(addsrc(['lib/*.js']))
     .pipe(gulp.dest('build/test/temp'))
@@ -142,10 +141,10 @@ gulp.task('tests-1', function () {
 
 gulp.task('tests-build',['tests-1'], function () {
   return gulp.src(['build/test/temp/*.spec.js'])
+    .pipe(concat('specs.js'))
     .pipe(browserify({transform: ['reactify']}))
     .pipe(rename("specs-all.js"))
     .pipe(gulp.dest('build/test'));
-
 });
 
 gulp.task('tests', ['tests-clean','tests-build'],function () {

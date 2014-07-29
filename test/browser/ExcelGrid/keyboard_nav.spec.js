@@ -1,5 +1,5 @@
 'use strict';
-var gridHelpers = require('./helpers.spec.js');
+var gridHelpers = require('./helpers.js');
 var React = require('React');
 var ReactTests = React.addons.TestUtils;
 
@@ -8,9 +8,16 @@ var baseKeyboardTests = {
   tests:{
     navigate:function(keyArgs, row, col) {
       var initial = this.grid.state.ActiveCell;
-      ReactTests.Simulate.keyDown(this.gridNode, keyArgs);
-      expect(this.grid.state.ActiveCell.row).toBe(row);
-      expect(this.grid.state.ActiveCell.col).toBe(col);
+      var times = keyArgs.times || 1;
+      for(var i=times;i>0;i--) {
+        ReactTests.Simulate.keyDown(this.gridNode, keyArgs);
+      }
+      if(isFinite(row)) {
+        expect(this.grid.state.ActiveCell.row).toBe(row);
+      }
+      if(isFinite(col)){
+        expect(this.grid.state.ActiveCell.col).toBe(col);
+      }
     },
   },
   matchers: {
@@ -116,62 +123,6 @@ describe("Keyboard Navigation - Frozen columns", function() {
     expect(this.grid.state.ActiveCell.col).toBe(1);
   });
 
-  it("Should scroll frozen pane when key down on regular pane", function() {
-
-
-  });
-
-  it("Should scroll frozen pane when key up on regular pane", function() {
-
-
-  });
-
-  it("Should scroll regular pane when key down on frozen pane", function() {
-
-
-  });
-
-  it("Should scroll regular pane when key up on frozen pane", function() {
-
-
-  });
-  it("Should scroll horizontally on left in regular pane", function() {
-
-
-  });
-  it("Should scroll horizontally on right in regular pane", function() {
-
-
-  });
-  it("Should scroll horizontally on left in frozen pane", function() {
-
-
-  });
-  it("Should scroll horizontally on right in frozen pane", function() {
-
-
-  });
-  it("Should scroll horizontally and ensure column is visible", function() {
-
-
-  });
-  it("Should scroll header horizontally on right in frozen pane", function() {
-
-
-  });
-  it("Should scroll header horizontally on left in frozen pane", function() {
-
-
-  });
-  it("Should scroll header horizontally on right in regular pane", function() {
-
-
-  });
-  it("Should scroll header horizontally on left in regular pane", function() {
-
-
-  });
-
 
 });
 describe("Keyboard Navigation - Cell Selection", function() {
@@ -229,6 +180,32 @@ describe("Keyboard Navigation - Cell Selection", function() {
 
   });
 
+});
+
+
+describe("Keyboard Navigation - Scroll", function() {
+
+  beforeEach(function() {
+    //by default column 0 is frozen
+    this.grid = ReactTests.renderIntoDocument(gridHelpers.getGrid());
+    this.gridNode = this.grid.refs.gridComponent.getDOMNode();
+    this.navigateTest = baseKeyboardTests.tests.navigate;
+  });
+
+  xit("Should scroll on key down", function() {
+    this.navigateTest({ key: 'Left', times: 100 });
+    //TODO scroll is (I think...) happening due to in built browser events
+    //so when we keyPress:Down in a scrollable div, it then fires scroll
+    //that doenst happen on simulated events though....
+    expect(this.grid.refs.gridComponent.refs.Viewport.state.displayEnd).toBeGreaterThan(99);
+  });
+  Xit("Should not prevent propogation", function() {
+    var called = false;
+    $(document).on('keydown', function() { called=true; });
+    this.navigateTest({ key: 'Left' });
+    //not working, argh. assume its due to being attached to a real dom?
+    expect(called).toBe(true);
+  });
 });
 
 describe("TODO", function() {
