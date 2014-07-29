@@ -1,9 +1,10 @@
 {
   "name": "react-grid",
   "version": "0.0.0",
-  "homepage": "https://github.com/adazzle/react-grid",
+  "homepage": "https://github.com/prometheusresearch/react-grid",
   "authors": [
-    "Steve Baker <Steven.Baker@adazzle.com>"
+    "Prometheus Research https://github.com/prometheusresearch",
+    "Adazzle https://github.com/adazzle"
   ],
   "moduleType": [],
   "license": "MIT",

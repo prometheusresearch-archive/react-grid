@@ -62,12 +62,12 @@
       ]
     ]
   },
-  "author": "adazzle",
+  "author": "Prometheus Research",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/adazzle/react-grid/issues"
+    "url": "https://github.com/prometheusresearch/react-grid/issues"
   },
-  "homepage": "https://github.com/adazzle/react-grid",
+  "homepage": "https://github.com/prometheusresearch/react-grid",
   "dependencies": {
     "reactify": "^0.11.0",
     "lodash": "^2.4.1",
