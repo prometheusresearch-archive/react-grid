@@ -1,4 +1,8 @@
 node_modules
+bower_components
 docs/build
-standalone/react-grid.min.js
-standalone/react-grid.js
+**/build
+dist
+build
+examples/build
+**/*.orig

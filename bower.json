@@ -1,0 +1,26 @@
+{
+  "name": "react-grid",
+  "version": "0.0.0",
+  "homepage": "https://github.com/adazzle/react-grid",
+  "authors": [
+    "Steve Baker <Steven.Baker@adazzle.com>"
+  ],
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "directory": "ext",
+  "dependencies": {
+    "jasmine": "~2.0.1",
+    "underscore": "~1.6.0",
+    "requirejs": "~2.1.14",
+    "jquery": "~2.1.1"
+  },
+  "devDependencies": {}
+}
