@@ -1,0 +1,47 @@
+{
+  "baseUrl": "/react-grid/",
+  "locals": {
+    "repo": "https://github.com/prometheusresearch/react-grid",
+    "title": "React Grid",
+    "pages": [
+      {
+        "name": "React Grid",
+        "path": ""
+      },
+      {
+        "name": "Documentation",
+        "path": "documentation/"
+      },
+      {
+        "name": "Examples",
+        "pages": [
+          {
+            "name": "Resizeable columns",
+            "path": "examples/resizeable-columns.html"
+          },
+          {
+            "name": "Locked columns",
+            "path": "examples/locked-columns.html"
+          },
+          {
+            "name": "Custom renderers",
+            "path": "examples/custom-renderers.html"
+          },
+          {
+            "name": "Implementing sortable grid",
+            "path": "examples/sortable-grid.html"
+          },
+          {
+            "name": "Implementing lazy-loading datagrid",
+            "path": "examples/datagrid.html"
+          }
+        ]
+      }
+    ]
+  },
+  "plugins": [
+    "./plugins/react-templates.coffee",
+    "./plugins/less-file.coffee",
+    "./plugins/jsx.coffee"
+  ]
+}
