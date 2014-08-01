@@ -14,7 +14,6 @@ var Example = React.createClass({
 
     var scripts = page.metadata.scripts || [];
     scripts.unshift(`scripts/${name}.js`);
-    scripts.unshift('scripts/ShowValue.js');
 
     return this.transferPropsTo(
       <Page scripts={scripts}>
