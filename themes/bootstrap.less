@@ -1,4 +1,5 @@
 @react-grid-shadow: 0px 0px 4px 0px @table-border-color;
+@react-grid-shadow-locked: none;
 @react-grid-scrollbar-color: @gray-light;
 
 .react-grid-Grid {
@@ -11,8 +12,26 @@
 }
 
 .react-grid-Cell {
+  transform: translate3d(0, 0, 0);
+  background-color: @body-bg;
   padding: @table-cell-padding;
   border-top: 1px solid @table-border-color;
+  text-overflow: ellipsis;
+}
+
+.react-grid-Row {
+  &:hover .react-grid-Cell {
+    background-color: darken(@body-bg, 5%);
+  }
+}
+
+.react-grid-Cell--locked {
+  z-index: 10001;
+}
+
+.react-grid-Cell--lastLocked {
+  border-right: 1px solid @table-border-color;
+  box-shadow: @react-grid-shadow-locked;
 }
 
 .react-grid-Header {
@@ -32,15 +51,24 @@
 .react-grid-HeaderCell {
   .user-select(none);
 
+  transform: translate3d(0, 0, 0);
+  background: @gray-lighter;
   padding: @table-cell-padding;
   font-weight: bold;
   border-right: 1px solid @table-border-color;
-
 }
 
 .react-grid-HeaderCell__resizeHandle:hover {
   cursor: ew-resize;
   background: @table-border-color;
+}
+
+.react-grid-HeaderCell--locked {
+  z-index: 10001;
+}
+
+.react-grid-HeaderCell--lastLocked {
+  box-shadow: @react-grid-shadow-locked;
 }
 
 .react-grid-HeaderCell--resizing {
@@ -49,46 +77,6 @@
   }
 }
 
-.react-grid-Scrollbar {
-
-  background: none;
-  .user-select(none);
-}
-
-.react-grid-Scrollbar__stickAppearance {
-  background-color: @react-grid-scrollbar-color;
-  opacity: 0.3;
-  border-radius: 7px;
-}
-
-.react-grid-Scrollbar--horizontal {
-  height: 15px;
-
-  .react-grid-Scrollbar__stick {
-    height: 15px;
-  }
-  .react-grid-Scrollbar__stickAppearance {
-    height: 7px;
-    margin-top: 4px;
-    margin-bottom: 4px;
-    margin-right: 2%;
-    margin-left: 2%;
-    width: 96%;
-  }
-}
-
-.react-grid-Scrollbar--vertical {
-  width: 15px;
-
-  .react-grid-Scrollbar__stick {
-    width: 15px;
-  }
-  .react-grid-Scrollbar__stickAppearance {
-    width: 7px;
-    margin-right: 4px;
-    margin-left: 4px;
-    height: 96%;
-    margin-top: 2%;
-    margin-bottom: 2%;
-  }
+.react-grid-ScrollShim {
+  z-index: 10002;
 }
