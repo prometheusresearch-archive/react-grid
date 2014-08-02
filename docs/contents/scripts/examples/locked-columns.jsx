@@ -21,12 +21,18 @@ var columns = [
   },
   {
     name: 'Name',
-    width: '60%',
+    width: '20%',
+    locked: true,
     key: 1
   },
   {
     name: 'Surname',
-    width: '60%',
+    width: '40%',
+    key: 2
+  },
+  {
+    name: 'Surname 2',
+    width: '40%',
     key: 2
   }
 ];
