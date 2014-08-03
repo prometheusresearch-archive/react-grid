@@ -21,11 +21,12 @@
     "react": "^0.11.1"
   },
   "devDependencies": {
+    "browserify": "^5.9.1",
+    "eslint-jsx": "git+https://github.com/andreypopp/eslint#jsx",
     "mocha": "^1.18.2",
     "mochify": "^0.11.3",
     "react": "^0.11.1",
-    "sinon": "^1.9.1",
-    "eslint-jsx": "git+https://github.com/andreypopp/eslint#jsx"
+    "sinon": "^1.9.1"
   },
   "browserify": {
     "transform": [

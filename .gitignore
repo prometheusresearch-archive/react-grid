@@ -1,4 +1,5 @@
 node_modules
-docs/build
+docs/_build
+olddocs/build
 standalone/react-grid.min.js
 standalone/react-grid.js

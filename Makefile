@@ -1,7 +1,7 @@
 BIN   = ./node_modules/.bin
 PATH := $(BIN):$(PATH)
 TESTS = $(shell find ./lib -path '**/tests/*.js')
-MAKE_DOCS = $(MAKE) --no-print-directory -C docs
+MAKE_DOCS = $(MAKE) --no-print-directory -C olddocs
 
 install:
 	@npm $@
