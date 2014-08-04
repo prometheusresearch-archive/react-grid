@@ -67,6 +67,7 @@ The code above will result in a grid:
 
    self
    styling
+   examples/index
    api
 
 .. _React: http://facebook.github.io/react

@@ -100,8 +100,17 @@ footer .rst-footer-buttons {
   background: #eee;
 }
 
+.react-grid-Cell {
+  background: #fff;
+}
+
+.react-grid-Cell--locked:last-of-type {
+  border-right: 1px solid #eee;
+}
+
 .react-grid-HeaderCell {
   border-right: 1px solid #ccc;
+  background: #eee;
 }
 
 .react-grid-HeaderCell__resizeHandle:hover {
