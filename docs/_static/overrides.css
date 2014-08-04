@@ -72,6 +72,7 @@ footer .rst-footer-buttons {
 .react-grid-Grid {
   border: 1px solid #ccc;
   font-size: 90%;
+  margin-bottom: 35px;
 }
 
 .react-grid-Header {
