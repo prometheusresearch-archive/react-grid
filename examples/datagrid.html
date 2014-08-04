@@ -1,0 +1,427 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Datagrid &mdash; react-grid 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+  
+    <link rel="top" title="react-grid 0.1.0 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="API reference" href="../api.html"/>
+        <link rel="prev" title="Sortable grid" href="sortable-grid.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> react-grid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">React Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../styling.html">Styling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../styling.html#header">Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../styling.html#viewport">Viewport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="selectable-rows.html">Selectable rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selectable-cells.html">Selectable cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locked-columns.html">Locked columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="custom-column-formatters.html">Custom column formatters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sortable-grid.html">Sortable grid</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Datagrid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">react-grid</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Datagrid</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/examples/datagrid.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="datagrid">
+<h1>Datagrid<a class="headerlink" href="#datagrid" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>var LoadingIndicator = React.createClass({
+
+  style: {
+    textAlign: &#39;center&#39;,
+    height: &#39;100%&#39;,
+    padding: &#39;8px&#39;
+  },
+
+  render: function() {
+    return (
+      &lt;div style={this.style} className=&quot;LoadingIndicator&quot;&gt;
+        Loading...
+      &lt;/div&gt;
+    );
+  }
+});
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>var DataGrid = React.createClass({
+
+  getInitialState: function() {
+    return {
+      rows: [],
+      hasNext: true
+    };
+  },
+
+  getDefaultProps: function() {
+    return {
+      rowsPerPage: 30,
+      artificialDelay: 1000
+    };
+  },
+
+  render: function() {
+    return this.transferPropsTo(
+      &lt;ReactGrid
+        rows={this.rows}
+        length={this.state.rows.length + (this.state.hasNext ? 1 : 0)}
+        /&gt;
+    );
+  },
+
+  componentDidMount: function() {
+    this.fetchNextPage();
+  },
+
+  componentWillMount: function() {
+    this._fetchInProgress = {};
+  },
+
+  rows: function(start, end) {
+    var rows = this.state.rows.slice(start, end);
+
+    if (this.state.hasNext &amp;&amp; this.state.rows.length - end &lt;= 0) {
+      rows.push(LoadingIndicator());
+    }
+
+    if (end &gt;= (this.state.rows.length - 5)) {
+      this.fetchNextPage();
+    }
+
+    return rows;
+  },
+
+  fetchNextPage: function() {
+    if (this.state.hasNext) {
+      var length = this.state.rows.length;
+      this.fetchPage(length, length + this.props.rowsPerPage);
+    }
+  },
+
+  fetchPage: function(start, end) {
+    var key = start + &#39;-&#39; + end;
+
+    if (this._fetchInProgress[key]) {
+      return;
+    }
+
+    this._fetchInProgress[key] = true;
+
+    $.ajax({url: this.props.url, dataType: &#39;json&#39;})
+      .then(function(data) {
+        data = data.slice(start, end);
+        var rows = this.state.rows.slice(0);
+
+        for (var i = 0, len = data.length; i &lt; len; i++) {
+          rows[start + i] = data[i];
+        }
+
+        var hasNext = data.length === end - start;
+
+        setTimeout(function() {
+          if (this.isMounted()) {
+            this.setState({hasNext: hasNext, length: rows.length, rows: rows}, function() {
+              this._fetchInProgress[key] = false;
+            }.bind(this));
+          }
+        }.bind(this), this.props.artificialDelay);
+      }.bind(this));
+  }
+});
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>React.renderComponent(
+  &lt;DataGrid
+    url=&quot;/react-grid/scripts/data.js&quot;
+    columns={columns}
+    rowHeight={40}
+    /&gt;,
+  document.getElementById(&#39;example&#39;));
+</pre></div>
+</div>
+<div id="example"></div></div>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", function() {
+    var React = require('react')
+var ReactGrid = require('react-grid')
+var LoadingIndicator = React.createClass({displayName: 'LoadingIndicator',
+
+  style: {
+    textAlign: 'center',
+    height: '100%',
+    padding: '8px'
+  },
+
+  render: function() {
+    return (
+      React.DOM.div({style: this.style, className: "LoadingIndicator"}, 
+        "Loading..."
+      )
+    );
+  }
+});
+var DataGrid = React.createClass({displayName: 'DataGrid',
+
+  getInitialState: function() {
+    return {
+      rows: [],
+      hasNext: true
+    };
+  },
+
+  getDefaultProps: function() {
+    return {
+      rowsPerPage: 30,
+      artificialDelay: 1000
+    };
+  },
+
+  render: function() {
+    return this.transferPropsTo(
+      ReactGrid({
+        rows: this.rows, 
+        length: this.state.rows.length + (this.state.hasNext ? 1 : 0)}
+        )
+    );
+  },
+
+  componentDidMount: function() {
+    this.fetchNextPage();
+  },
+
+  componentWillMount: function() {
+    this._fetchInProgress = {};
+  },
+
+  rows: function(start, end) {
+    var rows = this.state.rows.slice(start, end);
+
+    if (this.state.hasNext && this.state.rows.length - end <= 0) {
+      rows.push(LoadingIndicator());
+    }
+
+    if (end >= (this.state.rows.length - 5)) {
+      this.fetchNextPage();
+    }
+
+    return rows;
+  },
+
+  fetchNextPage: function() {
+    if (this.state.hasNext) {
+      var length = this.state.rows.length;
+      this.fetchPage(length, length + this.props.rowsPerPage);
+    }
+  },
+
+  fetchPage: function(start, end) {
+    var key = start + '-' + end;
+
+    if (this._fetchInProgress[key]) {
+      return;
+    }
+
+    this._fetchInProgress[key] = true;
+
+    $.ajax({url: this.props.url, dataType: 'json'})
+      .then(function(data) {
+        data = data.slice(start, end);
+        var rows = this.state.rows.slice(0);
+
+        for (var i = 0, len = data.length; i < len; i++) {
+          rows[start + i] = data[i];
+        }
+
+        var hasNext = data.length === end - start;
+
+        setTimeout(function() {
+          if (this.isMounted()) {
+            this.setState({hasNext: hasNext, length: rows.length, rows: rows}, function() {
+              this._fetchInProgress[key] = false;
+            }.bind(this));
+          }
+        }.bind(this), this.props.artificialDelay);
+      }.bind(this));
+  }
+});
+var columns =  [
+  {
+    name: 'ID',
+    key: 'id',
+    width: '20%'
+  },
+  {
+    name: 'Name',
+    key: 'title',
+    width: '80%'
+  }
+];
+React.renderComponent(
+  DataGrid({
+    url: "/react-grid/scripts/data.js", 
+    columns: columns, 
+    rowHeight: 40}
+    ),
+  document.getElementById('example'));
+    });
+    </script>
+    
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../api.html" class="btn btn-neutral float-right" title="API reference"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sortable-grid.html" class="btn btn-neutral" title="Sortable grid"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Prometheus Research, LLC.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/bundle.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

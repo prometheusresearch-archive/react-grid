@@ -1,0 +1,269 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Custom column formatters &mdash; react-grid 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="../_static/overrides.css" type="text/css" />
+  
+    <link rel="top" title="react-grid 0.1.0 documentation" href="../index.html"/>
+        <link rel="up" title="Examples" href="index.html"/>
+        <link rel="next" title="Sortable grid" href="sortable-grid.html"/>
+        <link rel="prev" title="Locked columns" href="locked-columns.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="fa fa-home"> react-grid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../index.html">React Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../styling.html">Styling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../styling.html#header">Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../styling.html#viewport">Viewport</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Examples</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="selectable-rows.html">Selectable rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="selectable-cells.html">Selectable cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="locked-columns.html">Locked columns</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Custom column formatters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sortable-grid.html">Sortable grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="datagrid.html">Datagrid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api.html">API reference</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">react-grid</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="index.html">Examples</a> &raquo;</li>
+      
+    <li>Custom column formatters</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="../_sources/examples/custom-column-formatters.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="custom-column-formatters">
+<h1>Custom column formatters<a class="headerlink" href="#custom-column-formatters" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python"><div class="highlight"><pre>var FancyCell = React.createClass({
+  render: function() {
+    return (
+      &lt;div style={{fontWeight: &#39;bold&#39;, color: &#39;red&#39;}}&gt;
+        № {this.props.value}
+      &lt;/div&gt;
+    );
+  }
+});
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre>var columns = [
+  {
+    name: &#39;№&#39;,
+    width: &#39;20%&#39;,
+    key: 0,
+    formatter: FancyCell
+  },
+  {
+    name: &#39;Name&#39;,
+    width: &#39;30%&#39;,
+    key: 1
+  },
+  {
+    name: &#39;Surname&#39;,
+    width: &#39;50%&#39;,
+    key: 2
+  }
+];
+</pre></div>
+</div>
+<div id="example"></div></div>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", function() {
+    var React = require('react')
+var ReactGrid = require('react-grid')
+var FancyCell = React.createClass({displayName: 'FancyCell',
+  render: function() {
+    return (
+      React.DOM.div({style: {fontWeight: 'bold', color: 'red'}}, 
+        "№ ", this.props.value
+      )
+    );
+  }
+});
+var columns = [
+  {
+    name: '№',
+    width: '20%',
+    key: 0,
+    formatter: FancyCell
+  },
+  {
+    name: 'Name',
+    width: '30%',
+    key: 1
+  },
+  {
+    name: 'Surname',
+    width: '50%',
+    key: 2
+  }
+];
+function rows(start, end) {
+  var rows = [];
+  for (var i = start; i < end; i++) {
+    rows.push([i, 'Name ' + i, 'Surname ' + i]);
+  }
+  return rows;
+}
+
+
+React.renderComponent(
+  ReactGrid({
+    columns: columns, 
+    length: 30000, 
+    rows: rows}
+    ),
+  document.getElementById('example'));
+    });
+    </script>
+    
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sortable-grid.html" class="btn btn-neutral float-right" title="Sortable grid"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="locked-columns.html" class="btn btn-neutral" title="Locked columns"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Prometheus Research, LLC.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+      <script type="text/javascript" src="../_static/bundle.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

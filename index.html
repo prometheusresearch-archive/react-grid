@@ -1,0 +1,283 @@
+
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>React Grid &mdash; react-grid 0.1.0 documentation</title>
+  
+
+  
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/overrides.css" type="text/css" />
+  
+    <link rel="top" title="react-grid 0.1.0 documentation" href="#"/>
+        <link rel="next" title="Styling" href="styling.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        <a href="#" class="fa fa-home"> react-grid</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+        
+            <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="">React Grid</a></li>
+<li class="toctree-l1"><a class="reference internal" href="styling.html">Styling</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="styling.html#header">Header</a></li>
+<li class="toctree-l2"><a class="reference internal" href="styling.html#viewport">Viewport</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="examples/index.html">Examples</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples/selectable-rows.html">Selectable rows</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/selectable-cells.html">Selectable cells</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/locked-columns.html">Locked columns</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/custom-column-formatters.html">Custom column formatters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/sortable-grid.html">Sortable grid</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples/datagrid.html">Datagrid</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api.html">API reference</a></li>
+</ul>
+
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">react-grid</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>React Grid</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            
+  <div class="section" id="react-grid">
+<h1>React Grid<a class="headerlink" href="#react-grid" title="Permalink to this headline">¶</a></h1>
+<p>React Grid provides data grid component for <a class="reference external" href="http://facebook.github.io/react">React</a>.</p>
+<div class="section" id="getting-started">
+<h2>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this headline">¶</a></h2>
+<p>React Grid is available through npm:</p>
+<div class="highlight-python"><div class="highlight"><pre>npm instal react
+npm instal git+https://github.com/prometheusresearch/react-grid
+</pre></div>
+</div>
+<p>Then you can require <tt class="docutils literal"><span class="pre">react</span></tt> and <tt class="docutils literal"><span class="pre">react-grid</span></tt> in your code:</p>
+<div class="highlight-python"><div class="highlight"><pre>var React = require(&#39;react&#39;)
+var ReactGrid = require(&#39;react-grid&#39;)
+</pre></div>
+</div>
+<p><tt class="docutils literal"><span class="pre">ReactGrid</span></tt> component requires at least <tt class="docutils literal"><span class="pre">columns</span></tt> and <tt class="docutils literal"><span class="pre">rows</span></tt> properties to
+be specified.</p>
+<p>The <tt class="docutils literal"><span class="pre">columns</span></tt> is a column specification, it provides information to grid on
+how to extract data for each of the column and how column should be represented
+and its features:</p>
+<div class="highlight-python"><div class="highlight"><pre>var columns = [
+  {
+    key: &#39;id&#39;,
+    name: &#39;ID&#39;,
+    width: &#39;20%&#39;,
+    resizeable: true
+  },
+  {
+    key: &#39;title&#39;,
+    name: &#39;Title&#39;
+  },
+  {
+    key: &#39;count&#39;,
+    name: &#39;Count&#39;,
+    width: &#39;20%&#39;
+  },
+]
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">rows</span></tt> property can be an array or a function which returns a slice of
+data given the specified range. If we specify <tt class="docutils literal"><span class="pre">rows</span></tt> as a function, we should
+also provide <tt class="docutils literal"><span class="pre">length</span></tt> property:</p>
+<div class="highlight-python"><div class="highlight"><pre>var rows = function(start, end) {
+  var result = []
+  for (var i = start; i &lt; end; i++) {
+    result.push({
+      id: i,
+      title: &#39;Title &#39; + i,
+      count: i * 1000
+    });
+  }
+  return result;
+}
+</pre></div>
+</div>
+<p>Now simply invoke <tt class="docutils literal"><span class="pre">React.renderComponent(..)</span></tt>:</p>
+<div class="highlight-python"><div class="highlight"><pre>React.renderComponent(
+  &lt;ReactGrid columns={columns} rows={rows} length={1000} /&gt;,
+  document.getElementById(&#39;example&#39;))
+</pre></div>
+</div>
+<p>The code above will result in a grid:</p>
+<div id="example"></div><div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+    <script>
+    window.addEventListener("DOMContentLoaded", function() {
+    var React = require('react')
+var ReactGrid = require('react-grid')
+var columns = [
+  {
+    key: 'id',
+    name: 'ID',
+    width: '20%',
+    resizeable: true
+  },
+  {
+    key: 'title',
+    name: 'Title'
+  },
+  {
+    key: 'count',
+    name: 'Count',
+    width: '20%'
+  },
+]
+var rows = function(start, end) {
+  var result = []
+  for (var i = start; i < end; i++) {
+    result.push({
+      id: i,
+      title: 'Title ' + i,
+      count: i * 1000
+    });
+  }
+  return result;
+}
+React.renderComponent(
+  ReactGrid({columns: columns, rows: rows, length: 1000}),
+  document.getElementById('example'))
+    });
+    </script>
+    
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="styling.html" class="btn btn-neutral float-right" title="Styling"/>Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014, Prometheus Research, LLC.
+    </p>
+  </div>
+
+  <a href="https://github.com/snide/sphinx_rtd_theme">Sphinx theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'0.1.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+      <script type="text/javascript" src="_static/bundle.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
