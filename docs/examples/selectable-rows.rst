@@ -139,7 +139,7 @@ Example code
 .. raw:: html
 
   <style>
-    .selected {
+    .react-grid-Row.selected .react-grid-Cell {
       border-bottom: 2px solid #aaa;
       border-top: 2px solid #aaa;
       background: #eee;

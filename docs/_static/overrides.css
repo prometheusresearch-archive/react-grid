@@ -90,13 +90,13 @@ footer .rst-footer-buttons {
   padding: 7px;
 }
 
-.react-grid-Row {
+.react-grid-Cell {
   border-bottom: 1px solid #eee;
 }
-.react-grid-Row:last-child {
+.react-grid-Row:last-child .react-grid-Cell {
   border-bottom: none;
 }
-.react-grid-Row:hover {
+.react-grid-Row:hover .react-grid-Cell {
   background: #eee;
 }
 

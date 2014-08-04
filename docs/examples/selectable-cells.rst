@@ -162,7 +162,19 @@ Example code
 .. raw:: html
 
   <style>
-    .selected {
+    .react-grid-Cell {
+      border-right: 1px solid #eee;
+    }
+    .react-grid-Cell:last-child {
+      border-right: none;
+    }
+    .react-grid-Row:hover .react-grid-Cell {
+      background: #fff;
+    }
+    .react-grid-Cell:hover {
+      background: #eee !important;
+    }
+    .react-grid-Cell.selected {
       border: 2px solid #aaa;
       background: #eee;
     }
