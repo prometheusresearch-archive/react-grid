@@ -11,13 +11,21 @@ React Grid is available through npm::
   npm instal react
   npm instal git+https://github.com/prometheusresearch/react-grid
 
-The usage is as simple as supplying ``columns``, ``rows`` and ``length`` props
-to ``<ReactGrid />`` component:
+Then you can require ``react`` and ``react-grid`` in your code:
 
 .. jsx::
 
   var React = require('react')
   var ReactGrid = require('react-grid')
+
+``ReactGrid`` component requires at least ``columns`` and ``rows`` properties to
+be specified.
+
+The ``columns`` is a column specification, it provides information to grid on
+how to extract data for each of the column and how column should be represented
+and its features:
+
+.. jsx::
 
   var columns = [
     {
@@ -28,16 +36,20 @@ to ``<ReactGrid />`` component:
     },
     {
       key: 'title',
-      name: 'Title',
-      resizeable: true
+      name: 'Title'
     },
     {
       key: 'count',
       name: 'Count',
-      width: '20%',
-      resizeable: true
+      width: '20%'
     },
   ]
+
+The ``rows`` property can be an array or a function which returns a slice of
+data given the specified range. If we specify ``rows`` as a function, we should
+also provide ``length`` property:
+
+.. jsx::
 
   var rows = function(start, end) {
     var result = []
@@ -50,6 +62,10 @@ to ``<ReactGrid />`` component:
     }
     return result;
   }
+
+Now simply invoke ``React.renderComponent(..)``:
+
+.. jsx::
 
   React.renderComponent(
     <ReactGrid columns={columns} rows={rows} length={1000} />,
