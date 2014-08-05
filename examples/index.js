@@ -6,19 +6,18 @@
 var React          = require('react/addons');
 
 var components = [];
+//register our component examples
+//the files need to module.export a react component
 components.push({id:'basic', module:require('./basic') });
 components.push({id:'frozen columns', module:require('./frozenCols') });
 
+//creates a simple nav menu and viewer
 var Examples = React.createClass({
  onMenuClick: function(component) {
    this.setState({exampleToShow: component});
  },
  getInitialState: function(){
-   var component =
-   components.length && components[0] && typeof(components[0]) === 'function'
-   ?  components[0]
-   : null
-   return { exampleToShow: component };
+   return { exampleToShow: null };
  },
  render: function() {
    var detail =this.state.exampleToShow ? this.state.exampleToShow({}) : '';
@@ -29,11 +28,10 @@ var Examples = React.createClass({
               </div>
             </nav>
             {detail}
-            <div id="exampleContainer"></div>
           </div>)
  },
 });
-
+//loops the components and puts out a menu item, wired to pass up the component
 var Menu = React.createClass({
  render: function() {
    var children = components.map((comp, idx) =>
