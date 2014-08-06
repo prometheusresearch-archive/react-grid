@@ -1,4 +1,5 @@
 node_modules
+bower_components
 docs/_build
 docs/_static/bundle.js
 olddocs/build
