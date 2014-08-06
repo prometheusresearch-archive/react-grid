@@ -5,6 +5,10 @@
 
 var React          = require('react/addons');
 
+//globally expose React
+//makes dev tools (among other things) work
+if(window) { window.React = window.React || React; }
+
 var components = [];
 //register our component examples
 //the files need to module.export a react component

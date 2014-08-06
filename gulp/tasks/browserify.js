@@ -7,9 +7,22 @@
 */
 
 var buildBundle = require('../util/bundleBuilder');
-var gulp         = require('gulp');
+var gulp        = require('gulp');
+var concat			= require('gulp-concat');
 
-gulp.task('browserify', function() {
+gulp.task('script-deps',function() {
+	return gulp.src([
+		'node_modules/es5-shim/es5-shim.js',
+		'node_modules/es5-shim/es5-sham.js',
+		'node_modules/es6-shim/es6-shim.js',
+		'bower_components/jasmine/lib/jasmine-core/jasmine.js',
+		'bower_components/jasmine/lib/jasmine-core/jasmine-html.js',
+		'bower_components/jasmine/lib/jasmine-core/boot/boot.js',
+	])
+	.pipe(concat('lib.js'))
+	.pipe(gulp.dest('./examples/build'))
+});
+gulp.task('browserify',['script-deps'], function() {
 	var bundleConfig = {
 		// Specify the entry point of your app
 		entries: ['./examples/index.js'],
