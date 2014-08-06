@@ -1,6 +1,6 @@
 var mergeInto = require("../../lib/mergeInto");
 var Grid = require('../../lib/Grid');
-var React = require('React');
+var React = require('react');
 
 var data = [];
 for (var i = 0; i < 2000; i++) {
@@ -60,7 +60,7 @@ var getGrid = function(args) {
     rows: rows,
     removeFreezeCols: false,
     dataLength: data.length,
-    height:400
+    rowHeight:40
   });
   return Grid({columns:args.columns, rows: args.rows, length: args.dataLength, height: args.height});
 };
