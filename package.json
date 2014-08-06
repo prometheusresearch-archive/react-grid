@@ -1,7 +1,7 @@
 {
   "name": "react-grid",
   "version": "0.0.0",
-  "description": "Data grid fro React",
+  "description": "Data grid for React",
   "main": "lib/index.js",
   "scripts": {
     "test": "make test"
@@ -38,19 +38,19 @@
     "browser-sync": "^1.3.2",
     "gulp-less": "^1.3.3",
     "bootstrap": "^3.2.0",
-    "gulp-jasmine": "~0.3.0",
+    "gulp-jasmine": "^0.3.0",
     "gulp-flatten": "0.0.2",
-    "gulp-concat": "~2.3.4",
-    "karma": "~0.12.19",
-    "karma-chrome-launcher": "~0.1.4",
-    "karma-jasmine": "~0.1.5",
-    "karma-firefox-launcher": "~0.1.3",
-    "karma-safari-launcher": "~0.1.1",
-    "karma-ie-launcher": "~0.1.5",
-    "karma-phantomjs-launcher": "~0.1.4",
-    "es6-shim": "~0.15.0",
-    "es5-shim": "~4.0.1",
-    "jasmine-react": "~1.0.7"
+    "gulp-concat": "^2.3.4",
+    "karma": "^0.12.19",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-safari-launcher": "^0.1.1",
+    "karma-ie-launcher": "^0.1.5",
+    "karma-phantomjs-launcher": "^0.1.4",
+    "es6-shim": "^0.15.0",
+    "es5-shim": "^4.0.1",
+    "jasmine-react": "^1.0.7"
   },
   "browserify": {
     "transform": [
