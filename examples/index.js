@@ -50,7 +50,7 @@ var Menu = React.createClass({
 
 var MenuItem = React.createClass({
   handleClick: function() {
-    if(this.props.onClick) { this.props.onClick(this.props.module); }
+    if (this.props.onClick) { this.props.onClick(this.props.module); }
   },
    render: function() {
      return (<li onClick={this.handleClick}><a href="#">{this.props.id}</a></li>);
