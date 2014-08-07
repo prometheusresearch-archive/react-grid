@@ -3,6 +3,9 @@ var gridHelpers = require('../browser/helpers.js');
 var React = require('react/addons');
 var ReactTests = React.addons.TestUtils;
 var  Grid = require('../../lib/Grid');
+var  Viewport = require('../../lib/Viewport');
+var  Canvas = require('../../lib/Canvas');
+var  Header = require('../../lib/Header');
 
 describe("Viewport scroll tests", function() {
   beforeEach(function() {
@@ -17,6 +20,9 @@ describe("Viewport scroll tests", function() {
     document.getElementById('sandbox').innerHTML += '<div style="width:600px;height:500px" id="gridContainer"></div>';
     //render the grid into the DOM
     this.grid = gridHelpers.renderGrid({containerId: 'gridContainer'});
+    this.canvas = ReactTests.findRenderedComponentWithType(this.grid, Canvas);
+    this.viewport = ReactTests.findRenderedComponentWithType(this.grid, Viewport);
+    this.header = ReactTests.findRenderedComponentWithType(this.grid, Header);
   });
 
   afterEach(function() {
@@ -27,14 +33,13 @@ describe("Viewport scroll tests", function() {
   });
 
   it("Should scroll the viewport state", function() {
-    var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-    ReactTests.Simulate.scroll(canvas, {target:{scrollTop:1000, scrollLeft:0}});
-    expect(this.grid.refs.viewport.state.scrollTop).toBe(1000);
+    ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollTop:1000, scrollLeft:0}});
+    expect(this.viewport.state.scrollTop).toBe(1000);
   });
 
   it("Should scroll the canvas dom", function() {
-    var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-    ReactTests.Simulate.scroll(canvas, {target:{scrollTop:1000, scrollLeft:0}});
+
+    ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollTop:1000, scrollLeft:0}});
 
     //TODO for some reason (even attached to a real DOM), scrollTop is still 0
     //could be React batching DOM updates?
@@ -42,35 +47,31 @@ describe("Viewport scroll tests", function() {
 
     //as a temp fix, we are grabbing the 'top' div which is essentially the spacer
     //this isnt available via refs (but should be?)
-    expect(canvas.childNodes[0].childNodes[0].style.height).toBe("420px");
+    expect(this.canvas.getDOMNode().childNodes[0].childNodes[0].style.height).toBe("420px");
   });
 
   it("Should scroll the viewport state horizontally", function() {
-      var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-      ReactTests.Simulate.scroll(canvas, {target:{scrollLeft:100, scrollTop:0}});
-      expect(this.grid.refs.viewport.state.scrollLeft).toBe(100);
+      ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollLeft:100, scrollTop:0}});
+      expect(this.viewport.state.scrollLeft).toBe(100);
   });
 
   xit("Should scroll the header horizontally", function() {
-      var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-      ReactTests.Simulate.scroll(canvas, {target:{scrollLeft:100, scrollTop:0}});
+      ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollLeft:100, scrollTop:0}});
       //TODO for some reason (even attached to a real DOM), scrollTop is still 0
       //could be React batching DOM updates?
-      expect(this.grid.refs.header.getDOMNode().scrollLeft).toBe(100);
+      expect(this.header.getDOMNode().scrollLeft).toBe(100);
   });
 
   xit("Should scroll the viewport horizontally", function() {
-      var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-      ReactTests.Simulate.scroll(canvas, {target:{scrollLeft:100, scrollTop:0}});
+      ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollLeft:100, scrollTop:0}});
       //TODO for some reason (even attached to a real DOM), scrollTop is still 0
       //could be React batching DOM updates?
       expect(canvas.scrollLeft).toBe(100);
   });
 
   it("Should scroll the header locked cells horizontally", function() {
-      var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-      ReactTests.Simulate.scroll(canvas, {target:{scrollLeft:100, scrollTop:0}});
-      expect(this.grid.refs.header.getDOMNode().getElementsByClassName('react-grid-HeaderCell--locked')[0].style.transform).toBe("translate3d(100px, 0px, 0px)");
+      ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollLeft:100, scrollTop:0}});
+      expect(this.header.getDOMNode().getElementsByClassName('react-grid-HeaderCell--locked')[0].style.transform).toBe("translate3d(100px, 0px, 0px)");
   });
 
   xit("Should scroll the canvas locked cells horizontally", function() {
@@ -80,8 +81,7 @@ describe("Viewport scroll tests", function() {
     //which is returning Canvas.getDOMNOde().scrollLeft
     //for some reason - that is 0 (which is what causes tests above to fail)
 
-    var canvas = this.grid.refs.viewport.refs.canvas.getDOMNode();
-    ReactTests.Simulate.scroll(canvas, {target:{scrollLeft:100, scrollTop:0}});
+    ReactTests.Simulate.scroll(this.canvas.getDOMNode(), {target:{scrollLeft:100, scrollTop:0}});
     expect(canvas.getElementsByClassName('react-grid-Cell--locked')[0].style.transform).toBe("translate3d(100px, 0px, 0px)");
   });
 });
