@@ -3,7 +3,7 @@
  */
 "use strict";
 
-var React          = require('react/addons');
+var React          = require('react');
 
 //globally expose React
 //makes dev tools (among other things) work

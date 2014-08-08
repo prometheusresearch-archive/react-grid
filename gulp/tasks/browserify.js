@@ -22,7 +22,7 @@ gulp.task('script-deps',function() {
   .pipe(concat('lib.js'))
   .pipe(gulp.dest('./examples/build'))
 });
-gulp.task('browserify',['script-deps'], function() {
+gulp.task('browserify',['clean','script-deps'], function() {
   var bundleConfig = {
     // Specify the entry point of your app
     entries: ['./examples/index.js'],

@@ -3,7 +3,7 @@ var jasmine = require('gulp-jasmine');
 //var flatten = require('gulp-flatten');
 var concat = require('gulp-concat');
 var buildBundle = require('../util/bundleBuilder');
-gulp.task('tests-concat', function () {
+gulp.task('tests-concat', ['clean'], function () {
   return gulp.src([
   //   'node_modules/es5-shim/es5-shim.js',
   // 'node_modules/es5-shim/es5-sham.js',
