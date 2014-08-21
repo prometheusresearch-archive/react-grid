@@ -15,7 +15,15 @@
   background-color: @body-bg;
   padding: @table-cell-padding;
   border-top: 1px solid @table-border-color;
+}
+
+.react-grid-Cell__value {
+  white-space: nowrap;
   text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .react-grid-Row {
@@ -49,6 +57,15 @@
   padding: @table-cell-padding;
   font-weight: bold;
   border-right: 1px solid @table-border-color;
+}
+
+.react-grid-HeaderCell__value {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .react-grid-HeaderCell__resizeHandle:hover {
