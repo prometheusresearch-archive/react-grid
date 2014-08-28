@@ -13,6 +13,12 @@ clean:
 
 test: test-phantomjs
 
+docs::
+	@$(MAKE) --no-print-directory -C docs html
+
+publish-docs::
+	@$(MAKE) --no-print-directory -C docs publish
+
 ci:
 	@NODE_PATH=$(NODE_PATH) mochify --watch -R dot $(TESTS)
 

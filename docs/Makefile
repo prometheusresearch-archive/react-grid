@@ -58,10 +58,10 @@ publish: clean html
 	git push -f origin gh-pages);
 
 clean:
-	rm -rf $(BUILDDIR)/*
+	rm -rf $(BUILDDIR)/* _static/bundle.js
 
 _static/bundle.js: $(shell find ../lib -name '*.js')
-	@../node_modules/.bin/browserify -d \
+	../node_modules/.bin/browserify -d \
 		-r ../:react-grid \
 		-r react/addons:react \
 		> $@
