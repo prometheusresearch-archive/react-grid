@@ -1,0 +1,26 @@
+{
+  "name": "react-grid",
+  "version": "0.1.0",
+  "homepage": "https://github.com/prometheusresearch/react-grid",
+  "authors": [
+    "Prometheus Research"
+  ],
+  "description": "Grid component for React",
+  "main": "./lib/index.js",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "react",
+    "react-component",
+    "grid"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
