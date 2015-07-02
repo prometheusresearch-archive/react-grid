@@ -10,12 +10,14 @@
     "type": "git",
     "url": "git://github.com/prometheusresearch/react-grid.git"
   },
+  "rex": {},
   "keywords": [
     "react",
     "grid"
   ],
   "dependencies": {
-    "reactify": "^0.14.0"
+    "reactify": "^0.14.0",
+    "jsx-loader": "^0.12.1"
   },
   "peerDependencies": {
     "react": "^0.12.1"
